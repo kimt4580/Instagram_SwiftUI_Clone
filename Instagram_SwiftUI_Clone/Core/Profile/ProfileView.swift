@@ -8,83 +8,86 @@
 import SwiftUI
 
 struct ProfileView: View {
+  
+  private let gridItems: [GridItem] = [
+    .init(.flexible(), spacing: 1),
+    .init(.flexible(), spacing: 1),
+    .init(.flexible(), spacing: 1)
+  ]
+  
   var body: some View {
-    VStack {
-      
-      VStack(spacing: 10) {
+    NavigationStack {
+      ScrollView {
         
-        HStack {
-          Image("duck")
-            .resizable()
-            .scaledToFill()
-            .frame(width: 80, height: 80)
-            .clipShape(Circle())
+        VStack(spacing: 10) {
           
-          Spacer()
+          HStack {
+            Image("duck")
+              .resizable()
+              .scaledToFill()
+              .frame(width: 80, height: 80)
+              .clipShape(Circle())
+            
+            Spacer()
+            
+            HStack(spacing: 8 ) {
+              UserStatView(value: 13, title: "게시물")
+              
+              UserStatView(value: 54, title: "팔로워")
+              
+              UserStatView(value: 1, title: "팔로잉")
+            }
+          }
+          .padding(.horizontal)
           
-          HStack(spacing: 8 ) {
-            VStack {
-              Text("13")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-              
-              Text("게시물")
-                .font(.footnote)
-            }
-            .frame(width: 76)
+          VStack(alignment: .leading, spacing: 4) {
+            Text("오리")
+              .font(.footnote)
+              .fontWeight(.semibold)
             
+            Text("꽥꽥입니다.")
+              .font(.footnote)
+          }
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .padding(.horizontal)
+          
+          Button {
             
-            VStack {
-              Text("5.1만")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-              
-              Text("팔로워")
-                .font(.footnote)
-            }
-            .frame(width: 76)
+          } label: {
+            Text("프로필 수정")
+              .font(.subheadline)
+              .fontWeight(.semibold)
+              .frame(width: 360, height: 32)
+              .foregroundStyle(.black)
+              .overlay(RoundedRectangle(cornerRadius: 6)
+                .stroke(Color.gray, lineWidth: 1)
+              )
             
-            VStack {
-              Text("1")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-              
-              Text("팔로잉")
-                .font(.footnote)
-            }
-            .frame(width: 76)
+          }
+          
+          Divider()
+          
+        }
+        
+        LazyVGrid(columns: gridItems, spacing: 1) {
+          ForEach(0 ... 14, id: \.self) { index in
+            Image("duck")
+              .resizable()
+              .scaledToFill()
           }
         }
-        .padding(.horizontal)
-        .padding(.bottom, 8)
-        
-        VStack(alignment: .leading, spacing: 4) {
-          Text("오리")
-            .font(.footnote)
-            .fontWeight(.semibold)
-          
-          Text("꽥꽥입니다.")
-            .font(.footnote)
+      }
+      .navigationTitle("프로필")
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .topBarTrailing) {
+          Button {
+            
+          } label: {
+            Image(systemName: "line.3.horizontal")
+              .foregroundStyle(Color.black)
+          }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal)
-        
-        Button {
-          
-        } label: {
-          Text("프로필 수정")
-            .font(.subheadline)
-            .fontWeight(.semibold)
-            .frame(width: 360, height: 32)
-            .foregroundStyle(.black)
-            .overlay(RoundedRectangle(cornerRadius: 6)
-              .stroke(Color.gray, lineWidth: 1)
-            )
-          
-        }
-        
-        Divider()
-        
       }
     }
   }
