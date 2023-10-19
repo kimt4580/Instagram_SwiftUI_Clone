@@ -10,12 +10,12 @@ import SwiftUI
 struct MainTapView: View {
     var body: some View {
       TabView {
-        Text("피드")
+        FeedView()
           .tabItem {
             Image(systemName: "house")
           }
         
-        Text("검색")
+        SearchView()
           .tabItem {
             Image(systemName: "magnifyingglass")
           }
